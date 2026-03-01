@@ -7,4 +7,4 @@ NTU DSAI Module 2 Data Pipeline for London Bicycles
 
 [Optimizing The Pipeline](./Stage%202%20Optimized%20Pipeline.md)
 
-[GitHub Automated CI/CD](./docs/images/GitHub%20CICD.svg)
+[GitHub CI/CD](./GitHub%20Automation.md)
