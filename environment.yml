@@ -1,0 +1,26 @@
+name: london-bikes-env
+channels:
+  - defaults  # referenced from bde/elt
+  - conda-forge  # referenced from bde/elt
+dependencies:
+  - python=3.11.14  # referenced from bde/elt
+  - pandas=2.3.3  # referenced from bde/elt
+  - python-duckdb=1.2.1  # referenced from bde
+  - duckdb-engine=0.15.0  # referenced from bde
+  - dbt-duckdb  # suggested by LLM
+  - google-cloud-bigquery  # suggested by LLM
+  - google-cloud-storage=3.4.1  # referenced from bde
+  - dbt-bigquery=1.10.3  # referenced from elt
+  - pyarrow=21.0.0  # Required for Parquet support, referenced from bde
+  - sqlalchemy=2.0.43 # referenced from bde
+  - streamlit  # suggested by LLM
+  - great-expectations=1.8.0  # referenced from elt
+  - seaborn=0.12.2  # referenced from elt
+  - matplotlib=3.10.7  # referenced from elt
+  - requests=2.32.5  # referenced from elt
+  - ipykernel=7.1.0  # referenced from elt
+  - pytest=8.4.2  # referenced from elt
+  - python-dotenv=1.1.0  # referenced from elt
+  - pip=25.3  # referenced from elt
+  - pip:  # referenced from elt
+      - meltano==4.0.8  # referenced from elt
