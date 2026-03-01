@@ -1,4 +1,4 @@
 # Stage 1 Core Pipeline
 
 ## Building The Pipeline
-![Building The Pipeline](assets/Building%20Pipeline.svg)
+![Building The Pipeline](docs/images/Building%20Pipeline.svg)
