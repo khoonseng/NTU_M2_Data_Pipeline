@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 def ingest_cycle_hire_from_gcs():
     # 1. Initialize local DuckDB database (The Warehouse Layer)
     con = duckdb.connect('../data/warehouse/london_bikes.db')
+    con.execute("CREATE SCHEMA IF NOT EXISTS london_bicycles")
     
     # 2. Install and load the httpfs extension for cloud connectivity
     con.execute("INSTALL httpfs; LOAD httpfs;")
@@ -28,12 +29,12 @@ def ingest_cycle_hire_from_gcs():
     # 5. Create the raw staging table directly from Parquet files
     # This follows the ELT model where data enters the warehouse in raw form [1]
     con.execute(f"""
-        CREATE OR REPLACE TABLE staging_cycle_hire AS 
+        CREATE OR REPLACE TABLE london_bicycles.staging_cycle_hire AS 
         SELECT * FROM read_parquet('{gcs_path}')
     """)
 
     # 6. Verify the integrity of the ingestion
-    count = con.execute("SELECT COUNT(*) FROM staging_cycle_hire").fetchone()
+    count = con.execute("SELECT COUNT(*) FROM london_bicycles.staging_cycle_hire").fetchone()
     print(f"Ingestion Complete: {count} records loaded into staging_cycle_hire table.")
     
     con.close()
@@ -41,6 +42,7 @@ def ingest_cycle_hire_from_gcs():
 def ingest_cycle_station_from_gcs():
     # 1. Initialize local DuckDB database (The Warehouse Layer)
     con = duckdb.connect('../data/warehouse/london_bikes.db')
+    con.execute("CREATE SCHEMA IF NOT EXISTS london_bicycles")
     
     # 2. Install and load the httpfs extension for cloud connectivity
     con.execute("INSTALL httpfs; LOAD httpfs;")
@@ -64,12 +66,12 @@ def ingest_cycle_station_from_gcs():
     # 5. Create the raw staging table directly from Parquet files
     # This follows the ELT model where data enters the warehouse in raw form [1]
     con.execute(f"""
-        CREATE OR REPLACE TABLE staging_cycle_station AS 
+        CREATE OR REPLACE TABLE london_bicycles.staging_cycle_station AS 
         SELECT * FROM read_parquet('{gcs_path}')
     """)
 
     # 6. Verify the integrity of the ingestion
-    count = con.execute("SELECT COUNT(*) FROM staging_cycle_station").fetchone()
+    count = con.execute("SELECT COUNT(*) FROM london_bicycles.staging_cycle_station").fetchone()
     print(f"Ingestion Complete: {count} records loaded into staging_cycle_station table.")
     
     con.close()
