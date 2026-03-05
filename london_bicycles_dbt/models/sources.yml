@@ -1,0 +1,13 @@
+version: 1
+
+sources:
+  - name: london_bicycles
+    # If target is cloud, use GCP Project ID; if local, DuckDB usually doesn't need a database prefix
+    database: "{{ 'bigquery-public-data' if target.name == 'cloud' else none }}"
+    
+    # Switch between your BigQuery dataset and your DuckDB schema
+    schema: "{{ 'london_bicycles' if target.name == 'local' else none }}"
+
+    tables:
+      - name: cycle_hire
+      - name: cycle_stations 
