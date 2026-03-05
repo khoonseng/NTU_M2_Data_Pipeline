@@ -1,0 +1,20 @@
+london_bicycles_dbt: # This is the profile name
+  target: local # This sets the default target
+  
+  outputs:
+    local:
+      type: duckdb
+      path: ../data/warehouse/london_bikes.db
+      schema: london_bicycles
+      threads: 1
+
+    cloud:
+      type: bigquery
+      dataset: london_bicycles
+      location: EU
+      method: oauth
+      project: testgcp-487607
+      priority: interactive
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      threads: 1
