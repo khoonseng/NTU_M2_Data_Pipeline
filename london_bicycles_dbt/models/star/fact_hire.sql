@@ -3,7 +3,7 @@ with valid_start_stations as (
     from {{ ref('stg_cycle_hire') }}
     where start_station_id 
         in (select station_id 
-            from {{ ref('stg_cycle_stations') }}
+            from {{ ref('dim_station') }}
         )
 ),
 valid_end_stations as (
@@ -11,7 +11,7 @@ valid_end_stations as (
     from {{ ref('stg_cycle_hire') }}
     where end_station_id 
         in (select station_id 
-            from {{ ref('stg_cycle_stations') }}
+            from {{ ref('dim_station') }}
         )
 )
 select
