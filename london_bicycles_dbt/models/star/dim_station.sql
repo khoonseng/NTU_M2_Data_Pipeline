@@ -1,3 +1,4 @@
 select
-    *
-from {{ source('london_bicycles','cycle_stations')}}
+    station_id,
+    name
+from {{ ref('stg_cycle_stations') }}

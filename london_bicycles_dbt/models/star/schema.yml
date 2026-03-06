@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  # Fact_Hire
+  - name: fact_hire
+    description: "Fact table for bicycle rentals."
+    columns:
+      - name: rental_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: duration_minutes
+        description: "The duration (in minutes) of each bicycle rental"
+        tests:
+          - not_null
+      - name: start_date
+        description: "The start date of each bicycle rental"
+        tests:
+          - not_null
+
+      # Relationships to dimension tables    
+      - name: bike_id
+        description: "The foreign key to the bicycle dimension table"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_bike')
+                  field: bike_id
+
+      - name: start_station_id
+        description: "The foreign key to the station dimension table"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_station')
+                  field: station_id
+
+      - name: end_station_id
+        description: "The foreign key to the station dimension table"
+        tests:
+          - relationships:
+              arguments:
+                  to: ref('dim_station')
+                  field: station_id                  
+
+  # Dim_Bike
+  - name: dim_bike
+    description: "Dimension table for bicycles."
+    columns:
+      - name: bike_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: bike_model
+        description: "The model of each bicycle e.g. classic or e-bike"
+        tests:
+          - not_null   
+
+  # Dim_Station
+  - name: dim_station
+    description: "Dimension table for stations."
+    columns:
+      - name: station_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: "The name of each station"
+        tests:
+          - not_null   
