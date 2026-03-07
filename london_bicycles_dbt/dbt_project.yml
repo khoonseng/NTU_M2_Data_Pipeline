@@ -46,8 +46,8 @@ seeds:
       +schema: star
       +column_types:
         date_key: integer
-        year: integer
-        month: integer
-        quarter: integer
-        day_of_week: integer
-        is_weekend: boolean
+        year: string
+        month: string
+        quarter: string
+        day_of_week: string
+        day_type: string
