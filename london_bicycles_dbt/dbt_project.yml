@@ -39,3 +39,15 @@ models:
     star:
       +materialized: table
       +schema: star
+
+seeds:
+  london_bicycles_dbt:
+    dim_date:
+      +schema: star
+      +column_types:
+        date_key: integer
+        year: string
+        month: string
+        quarter: string
+        day_of_week: string
+        day_type: string
