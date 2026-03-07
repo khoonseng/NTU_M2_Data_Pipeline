@@ -1,3 +1,19 @@
+{{
+  config(
+    materialized='table',
+    partition_by={
+      "field": "date_key",
+      "data_type": "int64",
+      "range": {
+        "start": 20150101,
+        "end": 20230131,
+        "interval": 1
+      }
+    },
+    cluster_by = ["bike_id"]
+  )
+}}
+
 with bikes_hired as (
     select distinct bike_id
     from {{ ref('fact_hire') }}  
