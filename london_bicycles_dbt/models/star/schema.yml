@@ -104,4 +104,42 @@ models:
       - name: name
         description: "The name of each station"
         tests:
-          - not_null   
+          - not_null
+
+  # Fact_Bike_Daily_Usage
+  - name: fact_bike_daily_usage
+    description: "Fact table for tracking bike daily usage."
+    columns:
+      - name: bike_usage_key
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+      - name: bike_id
+        description: "The bike id for each day"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_bike')
+                  field: bike_id           
+
+      - name: date_key
+        description: "The daily date for the period of tracking"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_date')
+                  field: date_key
+
+      - name: hire_count
+        description: "The daily hire count"
+        tests:
+          - not_null
+
+      - name: daily_duration_minutes
+        description: "The daily duration in minutes"
+        tests:
+          - not_null          
