@@ -10,14 +10,17 @@ models:
         tests:
           - unique
           - not_null
+
       - name: duration_minutes
         description: "The duration (in minutes) of each bicycle rental"
         tests:
           - not_null
+
       - name: start_date
         description: "The start date of each bicycle rental"
         tests:
           - not_null
+          
       - name: start_hour
         description: "The start hour (0 to 23) of each bicycle rental"
         tests:
@@ -48,7 +51,25 @@ models:
           - relationships:
               arguments:
                   to: ref('dim_station')
-                  field: station_id                  
+                  field: station_id
+
+      - name: start_date_key
+        description: "The foreign key to the date dimension table for start date"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_date')
+                  field: date_key  
+
+      - name: end_date_key
+        description: "The foreign key to the date dimension table for end date"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_date')
+                  field: date_key                    
 
   # Dim_Bike
   - name: dim_bike
@@ -59,10 +80,12 @@ models:
         tests:
           - unique
           - not_null
+
       - name: bike_model
         description: "The model of each bicycle e.g. classic or e-bike"
         tests:
           - not_null  
+
       - name: total_duration_minutes
         description: "The total usage in minutes of each bicycle"
         tests:
@@ -77,6 +100,7 @@ models:
         tests:
           - unique
           - not_null
+
       - name: name
         description: "The name of each station"
         tests:
