@@ -1,4 +1,4 @@
-name: Publish dbt Docs
+name: "Publish dbt Docs"
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
 
       - name: Install dbt
         run: |
-          pip install dbt-core dbt-duckdb # Add any other adapters your project needs for parsing
+          pip install dbt-core dbt-duckdb
 
       - name: Generate dbt docs
         run: dbt docs generate --target local
