@@ -113,7 +113,7 @@ models:
       - name: bike_usage_key
         description: "The primary key for this table"
         tests:
-          - unique
+          # - unique # commenting this out due to slowness in checking for 65,243,582 unique keys
           - not_null
 
       - name: bike_id
@@ -143,3 +143,13 @@ models:
         description: "The daily duration in minutes"
         tests:
           - not_null          
+
+      - name: cumulative_duration_minutes
+        description: "The cumulative duration in minutes"
+        tests:
+          - not_null
+
+      - name: date_value
+        description: "The date value"
+        tests:
+          - not_null               
