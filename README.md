@@ -9,7 +9,4 @@ NTU DSAI Module 2 Data Pipeline for London Bicycles
 
 [GitHub CI/CD](./GitHub%20Automation.md)
 
-Team member
-
-RS testing
-testing sync
+[dbt docs](./docs/dbt_docs/index.html)
