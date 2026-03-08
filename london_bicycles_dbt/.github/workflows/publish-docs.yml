@@ -38,7 +38,7 @@ jobs:
           pip install dbt-core dbt-duckdb # Add any other adapters your project needs for parsing
 
       - name: Generate dbt docs
-        run: dbt docs generate --target local
+        run: dbt docs generate
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
