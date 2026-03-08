@@ -46,6 +46,7 @@ seeds:
       +schema: star
       +column_types:
         date_key: integer
+        date_value: date
         year: string
         month: string
         quarter: string
