@@ -1,0 +1,165 @@
+version: 2
+
+models:
+  # Fact_Hire
+  - name: fact_hire
+    description: "Fact table for bicycle rentals."
+    columns:
+      - name: rental_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+      - name: duration_minutes
+        description: "The duration (in minutes) of each bicycle rental"
+        tests:
+          - not_null
+
+      - name: start_date
+        description: "The start date of each bicycle rental"
+        tests:
+          - not_null
+          
+      - name: start_hour
+        description: "The start hour (0 to 23) of each bicycle rental"
+        tests:
+          - not_null          
+
+      # Relationships to dimension tables    
+      - name: bike_id
+        description: "The foreign key to the bicycle dimension table"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_bike')
+                  field: bike_id
+
+      - name: start_station_id
+        description: "The foreign key to the station dimension table"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_station')
+                  field: station_id
+
+      - name: end_station_id
+        description: "The foreign key to the station dimension table"
+        tests:
+          - relationships:
+              arguments:
+                  to: ref('dim_station')
+                  field: station_id
+
+      - name: start_date_key
+        description: "The foreign key to the date dimension table for start date"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_date')
+                  field: date_key  
+
+      - name: end_date_key
+        description: "The foreign key to the date dimension table for end date"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_date')
+                  field: date_key                    
+
+  # Dim_Bike
+  - name: dim_bike
+    description: "Dimension table for bicycles."
+    columns:
+      - name: bike_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+      - name: bike_model
+        description: "The model of each bicycle e.g. classic or e-bike"
+        tests:
+          - not_null  
+
+      - name: total_duration_minutes
+        description: "The total usage in minutes of each bicycle"
+        tests:
+          - not_null
+
+  # Dim_Station
+  - name: dim_station
+    description: "Dimension table for stations."
+    columns:
+      - name: station_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+
+      - name: name
+        description: "The name of each station"
+        tests:
+          - not_null
+
+      - name: total_start_count
+        description: "The number of trips that starts from each station"
+        tests:
+          - not_null
+
+      - name: total_end_count
+        description: "The number of trips that ends at each station"
+        tests:
+          - not_null
+
+  # Fact_Bike_Daily_Usage
+  - name: fact_bike_daily_usage
+    description: "Fact table for tracking bike daily usage."
+    columns:
+      - name: bike_usage_key
+        description: "The primary key for this table"
+        tests:
+          # - unique # commenting this out due to slowness in checking for 65,243,582 unique keys
+          - not_null
+
+      - name: bike_id
+        description: "The bike id for each day"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_bike')
+                  field: bike_id           
+
+      - name: date_key
+        description: "The daily date for the period of tracking"
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                  to: ref('dim_date')
+                  field: date_key
+
+      - name: hire_count
+        description: "The daily hire count"
+        tests:
+          - not_null
+
+      - name: daily_duration_minutes
+        description: "The daily duration in minutes"
+        tests:
+          - not_null          
+
+      - name: cumulative_duration_minutes
+        description: "The cumulative duration in minutes"
+        tests:
+          - not_null
+
+      - name: date_value
+        description: "The date value"
+        tests:
+          - not_null               

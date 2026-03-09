@@ -1,9 +1,0 @@
-version: 1
-
-sources:
-  - name: raw_london_bicycles
-    description: "local database pulled from BigQuery"
-    schema: london_bicycles
-    tables:
-      - name: staging_cycle_hire
-      - name: staging_cycle_station

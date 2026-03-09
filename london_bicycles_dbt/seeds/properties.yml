@@ -1,0 +1,50 @@
+seeds:
+  # Dim_Date
+  - name: dim_date
+    description: "Dimensional table for date series."
+    columns:
+      - name: date_key
+        description: "The primary key for this table in YYYYMMDD"
+        tests:
+          - unique
+          - not_null
+
+      - name: date_value
+        description: "The date value for this table for partitioning"
+        tests:
+          - not_null          
+
+      - name: year
+        description: "The year value from date_key"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 9999]
+
+      - name: month
+        description: "The month value from date_key"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]          
+
+      - name: quarter
+        description: "The quarter value from date_key"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4]
+
+      - name: day_of_week
+        description: "The day_of_week value from date_key"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5, 6, 7]          
+
+      - name: day_type
+        description: "The day type value from date_key"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Weekday', 'Weekend','Unknown']          

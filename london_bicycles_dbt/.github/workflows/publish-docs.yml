@@ -1,0 +1,48 @@
+name: "Publish dbt Docs"
+
+on:
+  push:
+    branches:
+      - main # Or your default branch, e.g., master
+
+jobs:
+  build-and-deploy-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # This step is crucial for dbt-core projects that need a profiles.yml file
+      # It creates a temporary profiles.yml for dbt docs generate to use
+      - name: Set up dbt profile
+        run: |
+          echo "default:" > profiles.yml
+          echo "  target: local" >> profiles.yml
+          echo "  outputs:" >> profiles.yml
+          echo "    local:" >> profiles.yml
+          echo "      type: duckdb" >> profiles.yml
+          echo "      path: ':memory:'" >> profiles.yml
+        # Note: We use DuckDB here because it requires no credentials.
+        # The 'dbt docs generate' command only needs a valid profile to parse the project;
+        # it does not need to connect to your actual data warehouse.
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11.14' # Match your dbt project's Python version
+          cache: 'pip'
+
+      - name: Install dbt
+        run: |
+          pip install dbt-core dbt-duckdb
+
+      - name: Generate dbt docs
+        run: dbt docs generate --target local
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target
+          # This will commit the generated docs to the 'gh-pages' branch test
