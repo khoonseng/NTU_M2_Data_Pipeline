@@ -11,8 +11,9 @@ end_trips as (
     group by end_station_id
 )    
 select
+    station_key,
     station_id,
-    name,
+    station_name,
     COALESCE(st.total_start_count, 0) as total_start_count,
     COALESCE(et.total_end_count, 0) as total_end_count
 from {{ ref('stg_cycle_stations') }} s 

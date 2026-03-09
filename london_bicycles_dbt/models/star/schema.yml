@@ -95,13 +95,18 @@ models:
   - name: dim_station
     description: "Dimension table for stations."
     columns:
-      - name: station_id
-        description: "The primary key for this table"
+      - name: station_key
+        description: "The primary key (surrogate key) for this table"
         tests:
           - unique
           - not_null
 
-      - name: name
+      - name: station_id
+        description: "The id of each station"
+        tests:
+          - not_null
+
+      - name: station_name
         description: "The name of each station"
         tests:
           - not_null
