@@ -1,0 +1,8 @@
+inferred_state_h2,event_count,pct_to_top_demand_station
+Demand rebalancing likely (<8h + top-demand destination),946608,100.0
+Long repair likely (96h-336h),442812,19.84611979801812
+"Operational / unknown short idle (<8h, non-demand destination)",1014006,0.0
+Out-of-service candidate (>336h),107588,23.79447522028479
+"Preventive maintenance likely (24h-96h, max 2 per bike-year)",228461,19.56351412276056
+Repeat downtime beyond preventive cap (24h-96h),1232785,23.105326557347794
+Short repair likely (8h-24h),1794268,33.612202859327596

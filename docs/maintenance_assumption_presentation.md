@@ -1,218 +1,80 @@
-# Maintenance Assumption Analysis (Presentation-Ready)
-
-## 1) Executive Summary
-We built a data-driven proxy for likely maintenance activity because no official maintenance table exists.
-
-Rule used:
-
-1. Bike ends a customer ride at station A.
-2. Next customer ride starts at a different station B.
-3. Gap between those rides is unusually long (top 5% of relocation gaps, p95).
-
-Headline result:
-
-- `778` suspected maintenance-like events over `8.04` years.
-- Mean suspected gap: `80.0` hours.
-- Median suspected gap: `4340.5` minutes (~3.0 days).
-- Threshold used: `3250.6` minutes (~2.26 days).
-- Mean all-relocation gap (benchmark): `15.18` hours.
-- Effect size: suspected mean is about `5.27x` the benchmark mean.
-
-## 2) Scale Context (why 778 is not "too small")
-Coverage and base volume:
-
-- Time span: `2015-01-04` to `2023-01-17`.
-- Total rides: `83,434,866`.
-- Relocation events: `15,549`.
-- Suspected events: `778`.
-
-Rates:
-
-- `778` is `5.004%` of relocation events.
-- `778` is `0.000932%` of all rides.
-
-Interpretation:
-
-- This is rare by design because the method intentionally selects only the extreme tail (top 5% of relocation gaps).
-
-## 3) Why we used log in the visual analysis
-### 3.1 Problem with linear scale only
-Gap durations are strongly right-skewed with a long tail.
-On linear axes, very long gaps stretch the chart and compress most data near zero.
-
-### 3.2 What log axis means
-In the log-scale chart we still plot gap hours, but axis positions follow `log10(hours)`.
-
-Key ticks:
-
-- `10^0 = 1` hour
-- `10^1 = 10` hours
-- `10^2 = 100` hours
-
-So one major tick to the right means 10x larger duration.
-
-### 3.3 How `log10` histogram is created and why
-For the transformed chart, each gap is converted:
-
-- `z = log10(gap_hours)`
-
-Examples:
-
-- `1 hour -> 0`
-- `10 hours -> 1`
-- `100 hours -> 2`
-
-Why this is useful:
-
-- reduces skew
-- makes shape diagnostics easier
-- allows a normal-reference overlay for visual comparison
-
-Important caveat:
-
-- normal overlay is diagnostic only; it does not prove true normality.
-
-## 4) Graph-by-Graph explanation
-
-### A) Full distribution, log scale
-File: `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_gap_distribution.png`
-
-What it shows:
-
-- all relocation gaps in hours
-- red dashed line = p95 cutoff
-
-Why it is important:
-
-- best single chart for seeing both common short gaps and rare long gaps together
-
-### B) Full distribution, linear scale
-File: `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_gap_distribution_linear.png`
-
-What it shows:
-
-- same data as A, but no log scaling
-
-Why it is important:
-
-- plain-unit readability for non-technical audience
-
-Limitation:
-
-- long tail can visually compress the main mass
-
-### C) Suspected-only distribution
-File: `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_gap_distribution_suspected.png`
-
-What it shows:
-
-- only events at/above p95 threshold
-
-Why it is important:
-
-- focuses directly on inferred maintenance-like subset
-
-### D) `log10` histogram + normal reference
-File: `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_gap_log10_normal_reference.png`
-
-What it shows:
-
-- histogram of `log10(gap_hours)`
-- fitted normal reference line
-
-Why it is important:
-
-- checks if transformed distribution is closer to bell-shaped than raw hours
-
-### E) Monthly context + monthly rate
-File: `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_events_monthly.png`
-
-What it shows:
-
-Top panel:
-
-- monthly relocation count (blue)
-- monthly suspected count (red)
-
-Bottom panel:
-
-- monthly suspected rate (green light)
-- 3-month rolling average rate (green dark)
-
-Why it is important:
-
-- avoids false conclusions from count-only trends
-- separates volume effects from behavior-rate effects
-
-### F) Day-hour heatmap
-File: `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_events_day_hour_heatmap.png`
-
-What it shows:
-
-- suspected events by weekday and hour
-
-Why it is important:
-
-- highlights potential recurring operational windows
-
-### G) Top station transitions
-File: `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_top_station_transfers.png`
-
-What it shows:
-
-- most frequent origin->destination transitions among suspected events
-
-Why it is important:
-
-- helps identify repeat movement corridors potentially linked to servicing logistics
-
-### H) Duration benchmark comparison
-File: `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_duration_comparison.png`
-
-What it shows:
-
-- mean all-relocation duration
-- p95 cutoff
-- median suspected duration
-- mean suspected duration
-
-Why it is important:
-
-- gives direct evidence that suspected events are not just slightly longer, but materially longer
-- communicates maintenance-likeness strength in one slide
-
-## 5) Business-safe conclusion
-Most defensible wording:
-
-- "The ride-log evidence shows recurring long-duration relocation patterns that are operationally consistent with maintenance or servicing activity, but does not alone prove an official maintenance schedule."
-
-## 6) Thought process and ascertainment
-Reasoning chain (first-person framing):
-
-1. I do not have maintenance logs, so I infer from movement and downtime behavior.
-2. A bike ending at one station and next starting at another implies non-customer repositioning.
-3. Extremely long such gaps are more plausibly maintenance-like than routine balancing.
-4. I need both absolute counts and normalized rates to avoid misleading conclusions.
-
-What these results can ascertain:
-
-1. A measurable, repeatable maintenance-like signal exists.
-2. Suspected events are much longer than baseline relocation behavior.
-3. The inference is strong enough for operational hypothesis and monitoring use.
-
-What these results cannot ascertain alone:
-
-1. Verified maintenance work-order confirmation per event.
-2. Exact repair/service type.
-3. Formal maintenance schedule policy without external maintenance data.
-
-## 7) Reproducibility commands
-Run maintenance summary query:
+# Revised Maintenance Inference - Presentation Version
+
+## 1) Problem Statement
+No official maintenance table exists, so I infer maintenance/repair behavior from relocation inactivity gaps.
+
+## 2) User-Guided Assumptions Implemented
+1. Very short gaps can be logistics/rebalancing, not maintenance.
+2. Preventive maintenance should be a narrower duration window.
+3. Preventive maintenance should not happen too many times per bike-year.
+4. Longer gaps should be treated as repair or out-of-service candidates.
+
+## 3) Revised Rule Set
+- Rebalancing likely: `<8h` and destination is top-demand station (top 10% by starts)
+- Operational/unknown short idle: `<8h` and destination is not top-demand
+- Short repair likely: `8h-24h`
+- Preventive maintenance likely: `24h-96h`, capped to `max 2` events per bike-year
+- Repeat downtime beyond preventive cap: additional `24h-96h` events beyond cap
+- Long repair likely: `96h-336h`
+- Out-of-service candidate: `>336h`
+
+## 4) Core Results
+Class shares:
+1. Demand rebalancing likely: `16.4156%`
+2. Operational/unknown short idle: `17.5843%`
+3. Short repair likely: `31.1152%`
+4. Preventive maintenance likely (capped): `3.9618%`
+5. Repeat downtime beyond preventive cap: `21.3783%`
+6. Long repair likely: `7.6790%`
+7. Out-of-service candidate: `1.8657%`
+
+Preventive bike-year diagnostics:
+- Avg preventive events per bike-year: `1.84`
+- Median preventive events per bike-year: `2`
+- `% bike-year with >2 preventive`: `0.00%` (cap rule enforced)
+
+Demand-station signal:
+- Short repair class to top-demand station: `33.61%`
+- Preventive class to top-demand station: `19.56%`
+
+This supports the idea that short downtime is more mixed with operational movement.
+
+## 5) Math and Implementation Locations
+SQL logic and summary math:
+- `/home/shaun/NTU_M2_Data_Pipeline/queries/maintenance_hypothesis_revised.sql`
+
+Python charting/export logic:
+- `/home/shaun/NTU_M2_Data_Pipeline/scripts/plot_maintenance_hypothesis_revised.py`
+
+Libraries:
+- DuckDB SQL
+- Python: `duckdb`, `pandas`, `numpy`, `matplotlib`, `seaborn`
+
+## 6) Revised Chart Set
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_gap_distribution_thresholds.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_class_counts.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_monthly_mix.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_preventive_per_bike_year.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_top_demand_share_by_class.png`
+
+## 7) Key Message for Stakeholders
+- The older broad preventive band was too permissive.
+- The revised model better separates likely logistics, repair, and capped preventive signals.
+- This is still inference; validate against true maintenance logs when available.
+
+## 8) Final Conclusion
+1. Rebalancing signal is credible and consistent with destination-demand behavior.
+2. Raw `24h-96h` counts correlate strongly with bike usage (`r=0.8801`), so duration-only preventive labeling is weak.
+3. The preventive cap (`max 2 per bike-year`) makes the preventive class conservative and usable for monitoring.
+4. Final stance:
+   - Use this as an inference framework for operations.
+   - Do not treat it as confirmed maintenance truth without work-order data.
+
+## 9) Repro Commands
 ```bash
-duckdb /home/shaun/NTU_M2_Data_Pipeline/data/warehouse/london_bikes.db < /home/shaun/NTU_M2_Data_Pipeline/queries/maintenance_assumption_percentile.sql
+duckdb /home/shaun/NTU_M2_Data_Pipeline/data/warehouse/london_bikes.db < /home/shaun/NTU_M2_Data_Pipeline/queries/maintenance_hypothesis_revised.sql
 ```
 
-Regenerate all charts:
 ```bash
-conda run -n london-bikes-env python /home/shaun/NTU_M2_Data_Pipeline/scripts/plot_maintenance_assumption.py
+conda run -n london-bikes-env python /home/shaun/NTU_M2_Data_Pipeline/scripts/plot_maintenance_hypothesis_revised.py
 ```

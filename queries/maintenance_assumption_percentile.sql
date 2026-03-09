@@ -14,10 +14,10 @@ WITH rides AS (
     start_date,
     -- I keep end_date because I need the current ride end timestamp.
     end_date,
-    -- I rename the original start station field to a shorter alias for readability.
-    start_station_logical_terminal AS start_station_id,
-    -- I rename the original end station field to a shorter alias for readability.
-    end_station_logical_terminal AS end_station_id
+    -- I use station_id fields because they have full multi-year coverage in this dataset.
+    start_station_id,
+    -- I use station_id fields because they have full multi-year coverage in this dataset.
+    end_station_id
   -- I read from the staged hire table in the london_bicycles schema.
   FROM london_bicycles.staging_cycle_hire
   -- I only keep rows with a valid bike_id so I can track each bike over time.
