@@ -27,10 +27,10 @@ select
     COALESCE(NULLIF(h.bike_model, ''), 'CLASSIC') as bike_model,
     h.start_date,
     h.end_date,
-    COALESCE(COALESCE(h.start_station_id, s.id), 0) as start_station_id,
+    COALESCE(COALESCE(COALESCE(h.start_station_id, s.id), h.start_station_logical_terminal), 0) as start_station_id,
     COALESCE(h.start_station_name, s.name) as start_station_name,
     CASE
-        WHEN h.end_date is not null THEN COALESCE(COALESCE(h.end_station_id, e.id),0)
+        WHEN h.end_date is not null THEN COALESCE(COALESCE(COALESCE(h.end_station_id, e.id), h.end_station_logical_terminal), 0)
         ELSE h.end_station_id
     END as end_station_id,
     CASE
