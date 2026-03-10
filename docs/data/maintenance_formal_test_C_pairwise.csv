@@ -1,0 +1,4 @@
+class_a,class_b,n_a,n_b,median_a,median_b,u_stat,pval_raw,cliffs_delta,pval_holm
+Short repair likely (8h-24h),"Preventive maintenance likely (24h-96h, max 2 per bike-year)",1794268,228461,15.233333333333333,75.48333333333333,0.0,0.0,-1.0,0.0
+Short repair likely (8h-24h),Long repair likely (96h-336h),1794268,442812,15.233333333333333,155.28333333333333,0.0,0.0,-1.0,0.0
+"Preventive maintenance likely (24h-96h, max 2 per bike-year)",Long repair likely (96h-336h),228461,442812,75.48333333333333,155.28333333333333,0.0,0.0,-1.0,0.0

@@ -1,0 +1,2 @@
+n_events,prevalence_24_96,pointbiserial_r_logusage_vs_is24_96,pointbiserial_p,mannwhitney_u,mannwhitney_p,cliffs_delta_logusage_24_96_vs_non,logit_coef_log1p_usage,logit_intercept,logit_odds_ratio_per_1_logunit,logit_auc
+5766528,0.2534013534660718,-0.062228478013102176,0.0,2938536469245.5,0.0,-0.06580800426030635,-0.10943254529945849,-0.14400246617817014,0.8963426248462557,0.5329040018960914

@@ -1,0 +1,2 @@
+n_short,n_non_short,top_short,top_non_short,rate_top_short,rate_top_non_short,rate_diff,z_stat,pval_z_two_sided,odds_ratio,pval_fisher_two_sided,chi2_stat,chi2_dof,pval_chi2
+1960614,3805914,946608,1046108,0.4828120170518011,0.2748638040691408,0.2079482129826603,497.4221217528134,0.0,2.462814358166541,0.0,247427.84769595056,1,0.0

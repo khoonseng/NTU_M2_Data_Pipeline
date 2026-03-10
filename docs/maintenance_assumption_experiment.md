@@ -1,7 +1,7 @@
-# Revised Maintenance Inference Experiment (Based on Your Hypotheses)
+# Revised Maintenance Inference Experiment (Based on My Hypotheses)
 
-## 1) Why This Revision Was Needed
-I revised the model because your objections were valid:
+## 1) Why I Revised This
+I revised the model because my objections were valid:
 
 1. `2h-5.64h` is likely too short to represent maintenance.
 2. `5.64h-56.58h` is too broad for one preventive-maintenance class.
@@ -21,7 +21,7 @@ So I shifted from the older "single broad preventive band" to a hypothesis-drive
 ### SQL (core math and class logic)
 - `/home/shaun/NTU_M2_Data_Pipeline/queries/maintenance_hypothesis_revised.sql`
 
-This SQL file computes:
+I use this SQL file to compute:
 1. station popularity threshold (top 10% stations by starts),
 2. relocation gaps in minutes/hours,
 3. per-bike-year preventive candidate ranking,
@@ -33,7 +33,7 @@ This SQL file computes:
 ### Python (charting + export tables)
 - `/home/shaun/NTU_M2_Data_Pipeline/scripts/plot_maintenance_hypothesis_revised.py`
 
-This script:
+I use this script to:
 1. queries base relocation events,
 2. applies revised classification,
 3. generates revised charts,
@@ -167,7 +167,7 @@ This script:
 - Repeat downtime class to top-demand station: `23.11%`
 
 Interpretation:
-- This supports your concern that short gaps are strongly mixed with operational logistics.
+- I treat this as support for my concern that short gaps are strongly mixed with operational logistics.
 - Preventive class is now narrower and frequency-capped.
 
 ## 7) New / Revised Charts
@@ -225,17 +225,17 @@ conda run -n london-bikes-env python /home/shaun/NTU_M2_Data_Pipeline/scripts/pl
 ```
 
 ## 11) Caveats (Important)
-1. This is still an inference model, not direct work-order truth.
+1. I still treat this as an inference model, not direct work-order truth.
 2. The preventive cap (`max 2`) is assumption-driven; it improves interpretability but is a policy choice.
 3. If/when true maintenance logs become available, this model should be validated and recalibrated.
 
 ## 12) Final Detailed Conclusion
-1. Your challenge to the old broad preventive band was correct.
+1. My challenge to the old broad preventive band was correct.
 2. The revised model separates short logistics-like behavior from maintenance-like behavior more credibly.
 3. Per-bike-year diagnostics show raw `24h-96h` events are strongly usage-driven:
    - `corr(usage, raw 24h-96h count) = 0.8801`
    - raw average `24h-96h` events per bike-year = `11.77`
-4. This means duration alone is not enough to call preventive maintenance.
+4. I conclude that duration alone is not enough to call preventive maintenance.
 5. The capped rule (`max 2 preventive per bike-year`) makes preventive classification conservative and operationally usable:
    - avg assigned preventive per bike-year = `1.84`
    - median assigned preventive per bike-year = `2`
@@ -247,3 +247,40 @@ conda run -n london-bikes-env python /home/shaun/NTU_M2_Data_Pipeline/scripts/pl
    - Rebalancing hypothesis: supported.
    - Broad preventive-by-duration hypothesis: not supported.
    - Revised capped preventive hypothesis: acceptable as a practical inference rule, but still not proof without maintenance logs.
+
+## 13) Operational Scheduling Rule I Can Use Now
+### Why I need this
+I do not have explicit preventive-maintenance records, and my current tests do not prove a true preventive schedule from observed relocation gaps alone.
+So I need an operational scheduling rule that is practical, transparent, and robust to skewed data.
+
+### Statistic I choose
+I choose a **quantile-based trigger on cumulative usage minutes**, not a mean-based trigger.
+
+Technical definition:
+1. Define `T` as cumulative usage minutes before first high-risk downtime event.
+2. Preferred high-risk event: `gap_hours >= 96` (long repair/out-of-service risk).
+3. Temporary proxy until full trigger study is complete: first `24h-96h` event usage.
+4. Schedule interval rule: `S = Qp(T)` where `p` is policy percentile.
+
+### Why quantile is better than mean for this case
+1. My distribution is right-skewed with heavy tail behavior.
+2. Mean gets pulled by extreme values and is less stable operationally.
+3. Quantiles let me directly choose risk appetite:
+   - `Q50`: aggressive
+   - `Q75`: balanced
+   - `Q90`: conservative
+
+### Values from my current proxy analysis
+Using first `24h-96h` hit as proxy:
+1. `Q50(T) = 426` minutes (`~7.10` usage hours)
+2. `Q75(T) = 1035` minutes (`~17.25` usage hours)
+3. `Q90(T) = 2288` minutes (`~38.13` usage hours)
+
+### Recommended start policy
+1. I start at `Q75` (`~1000-1050` usage minutes) as my default preventive trigger.
+2. I apply a calendar backstop (for example monthly) for low-usage bikes.
+3. I monitor post-policy rates of `>=96h` and `>336h` gaps and tune percentile if needed.
+
+### What this does and does not mean
+1. This gives me a defensible operational schedule proposal from available data.
+2. This does not prove true workshop preventive cycles without maintenance logs.

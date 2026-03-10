@@ -37,7 +37,7 @@ Demand-station signal:
 - Short repair class to top-demand station: `33.61%`
 - Preventive class to top-demand station: `19.56%`
 
-This supports the idea that short downtime is more mixed with operational movement.
+I treat this as support for the idea that short downtime is more mixed with operational movement.
 
 ## 5) Math and Implementation Locations
 SQL logic and summary math:
@@ -60,17 +60,34 @@ Libraries:
 ## 7) Key Message for Stakeholders
 - The older broad preventive band was too permissive.
 - The revised model better separates likely logistics, repair, and capped preventive signals.
-- This is still inference; validate against true maintenance logs when available.
+- I still treat this as inference; I validate against true maintenance logs when available.
 
 ## 8) Final Conclusion
 1. Rebalancing signal is credible and consistent with destination-demand behavior.
 2. Raw `24h-96h` counts correlate strongly with bike usage (`r=0.8801`), so duration-only preventive labeling is weak.
 3. The preventive cap (`max 2 per bike-year`) makes the preventive class conservative and usable for monitoring.
 4. Final stance:
-   - Use this as an inference framework for operations.
-   - Do not treat it as confirmed maintenance truth without work-order data.
+   - I use this as an inference framework for operations.
+   - I do not treat it as confirmed maintenance truth without work-order data.
 
-## 9) Repro Commands
+## 9) Scheduling Statistic I Use Operationally
+1. I use a quantile-based usage trigger, not mean duration.
+2. Definition:
+   - `T` = cumulative usage minutes before first risk event.
+   - Current proxy risk event = first `24h-96h` event.
+   - Schedule interval `S = Qp(T)`.
+3. Policy choices:
+   - `Q50`: aggressive
+   - `Q75`: balanced (my recommended default)
+   - `Q90`: conservative
+4. Current proxy values:
+   - `Q50 = 426 min` (`~7.10h`)
+   - `Q75 = 1035 min` (`~17.25h`)
+   - `Q90 = 2288 min` (`~38.13h`)
+5. I start with `Q75` plus a calendar backstop, then tune using observed `>=96h` and `>336h` rates.
+6. This is an operational policy recommendation, not proof of true maintenance scheduling.
+
+## 10) Repro Commands
 ```bash
 duckdb /home/shaun/NTU_M2_Data_Pipeline/data/warehouse/london_bikes.db < /home/shaun/NTU_M2_Data_Pipeline/queries/maintenance_hypothesis_revised.sql
 ```
