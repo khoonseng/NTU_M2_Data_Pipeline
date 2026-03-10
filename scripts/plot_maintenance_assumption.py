@@ -107,7 +107,7 @@ def _save_full_distribution(df: pd.DataFrame) -> None:
   ax.grid(alpha=0.25)
   ax.legend()
   fig.tight_layout()
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_gap_distribution.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M01_maintenance_gap_distribution.png"), dpi=150)
   plt.close(fig)
 
 
@@ -120,7 +120,7 @@ def _save_suspected_distribution(df: pd.DataFrame) -> None:
   ax.set_ylabel("Number of Suspected Events")
   ax.grid(alpha=0.25)
   fig.tight_layout()
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_gap_distribution_suspected.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M03_maintenance_gap_distribution_suspected.png"), dpi=150)
   plt.close(fig)
 
 
@@ -137,7 +137,7 @@ def _save_linear_distribution(df: pd.DataFrame) -> None:
   ax.grid(alpha=0.25)
   ax.legend()
   fig.tight_layout()
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_gap_distribution_linear.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M02_maintenance_gap_distribution_linear.png"), dpi=150)
   plt.close(fig)
 
 
@@ -171,7 +171,7 @@ def _save_overall_gap_boxplot(df: pd.DataFrame) -> None:
     fontsize=10,
   )
   fig.tight_layout(rect=(0, 0, 1, 0.95))
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_gap_boxplot_overall.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M13_maintenance_gap_boxplot_overall.png"), dpi=150)
   plt.close(fig)
 
 
@@ -199,7 +199,7 @@ def _save_log10_with_normal_overlay(df: pd.DataFrame) -> None:
     ax.legend()
   fig.tight_layout()
   fig.savefig(
-    os.path.join(OUTPUT_DIR, "maintenance_gap_log10_normal_reference.png"),
+    os.path.join(OUTPUT_DIR, "M04_maintenance_gap_log10_normal_reference.png"),
     dpi=150,
   )
   plt.close(fig)
@@ -273,7 +273,7 @@ def _save_monthly_trend(df: pd.DataFrame) -> None:
   axes[1].legend()
 
   fig.tight_layout()
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_events_monthly.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M05_maintenance_events_monthly.png"), dpi=150)
   plt.close(fig)
 
 
@@ -311,7 +311,7 @@ def _save_monthly_suspected_zoom(df: pd.DataFrame) -> None:
   ax.grid(alpha=0.25)
   ax.legend()
   fig.tight_layout()
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_events_monthly_suspected_zoom.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M06_maintenance_events_monthly_suspected_zoom.png"), dpi=150)
   plt.close(fig)
 
 
@@ -336,7 +336,7 @@ def _save_day_hour_heatmap(df: pd.DataFrame) -> None:
   ax.set_xlabel("Hour of Day")
   ax.set_ylabel("Day of Week")
   fig.tight_layout()
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_events_day_hour_heatmap.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M07_maintenance_events_day_hour_heatmap.png"), dpi=150)
   plt.close(fig)
 
 
@@ -358,7 +358,7 @@ def _save_top_transfers(df: pd.DataFrame) -> None:
   ax.set_xlabel("Number of Suspected Events")
   ax.set_ylabel("Station Transition")
   fig.tight_layout()
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_top_station_transfers.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M08_maintenance_top_station_transfers.png"), dpi=150)
   plt.close(fig)
 
 
@@ -396,7 +396,7 @@ def _save_duration_summary_comparison(df_all: pd.DataFrame, df_suspected: pd.Dat
     ax.text(v + max(summary["hours"]) * 0.01, i, f"{v:.2f}h", va="center")
 
   fig.tight_layout()
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_duration_comparison.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M09_maintenance_duration_comparison.png"), dpi=150)
   plt.close(fig)
 
 
@@ -459,7 +459,7 @@ def _save_classification_counts(df_class: pd.DataFrame) -> None:
   ax.set_ylabel("")
   ax.grid(alpha=0.25, axis="x")
   fig.tight_layout()
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_inferred_state_counts.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M10_maintenance_inferred_state_counts.png"), dpi=150)
   plt.close(fig)
 
 
@@ -497,7 +497,7 @@ def _save_classification_monthly(df_class: pd.DataFrame) -> None:
   ax.grid(alpha=0.2)
   ax.legend(loc="upper left", fontsize=8, title="Inferred State")
   fig.tight_layout()
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_inferred_state_monthly_mix.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M11_maintenance_inferred_state_monthly_mix.png"), dpi=150)
   plt.close(fig)
 
 
@@ -528,7 +528,7 @@ def _save_service_class_boxplot(df_class: pd.DataFrame) -> None:
   ax.set_ylabel("log10(Gap Hours)")
   ax.grid(alpha=0.25, axis="y")
   fig.tight_layout()
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_service_classes_log10_boxplot.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M12_maintenance_service_classes_log10_boxplot.png"), dpi=150)
   plt.close(fig)
 
 
@@ -565,19 +565,19 @@ def main() -> None:
 
   print("Generated plot files in:", OUTPUT_DIR)
   print(f"- classification_log10_mu={mu_log:.4f}, classification_log10_sigma={sigma_log:.4f}")
-  print("- maintenance_gap_distribution.png")
-  print("- maintenance_gap_distribution_suspected.png")
-  print("- maintenance_gap_distribution_linear.png")
-  print("- maintenance_gap_boxplot_overall.png")
-  print("- maintenance_gap_log10_normal_reference.png")
-  print("- maintenance_events_monthly.png")
-  print("- maintenance_events_monthly_suspected_zoom.png")
-  print("- maintenance_events_day_hour_heatmap.png")
-  print("- maintenance_top_station_transfers.png")
-  print("- maintenance_duration_comparison.png")
-  print("- maintenance_inferred_state_counts.png")
-  print("- maintenance_inferred_state_monthly_mix.png")
-  print("- maintenance_service_classes_log10_boxplot.png")
+  print("- M01_maintenance_gap_distribution.png")
+  print("- M03_maintenance_gap_distribution_suspected.png")
+  print("- M02_maintenance_gap_distribution_linear.png")
+  print("- M13_maintenance_gap_boxplot_overall.png")
+  print("- M04_maintenance_gap_log10_normal_reference.png")
+  print("- M05_maintenance_events_monthly.png")
+  print("- M06_maintenance_events_monthly_suspected_zoom.png")
+  print("- M07_maintenance_events_day_hour_heatmap.png")
+  print("- M08_maintenance_top_station_transfers.png")
+  print("- M09_maintenance_duration_comparison.png")
+  print("- M10_maintenance_inferred_state_counts.png")
+  print("- M11_maintenance_inferred_state_monthly_mix.png")
+  print("- M12_maintenance_service_classes_log10_boxplot.png")
 
 
 if __name__ == "__main__":

@@ -173,29 +173,29 @@ Interpretation:
 ## 7) New / Revised Charts
 
 Generated revised chart set:
-- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_gap_distribution_thresholds.png`
-- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_class_counts.png`
-- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_monthly_mix.png`
-- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_preventive_per_bike_year.png`
-- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_top_demand_share_by_class.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/M14_maintenance_h2_gap_distribution_thresholds.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/M15_maintenance_h2_class_counts.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/M16_maintenance_h2_monthly_mix.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/M17_maintenance_h2_preventive_per_bike_year.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/M18_maintenance_h2_top_demand_share_by_class.png`
 
 Optional context chart still available:
-- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_gap_boxplot_overall.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/M13_maintenance_gap_boxplot_overall.png`
 
 ### What each revised chart answers
-1. `maintenance_h2_gap_distribution_thresholds.png`
+1. `M14_maintenance_h2_gap_distribution_thresholds.png`
 - Shows full gap shape and where decision boundaries sit (8h, 24h, 96h, 336h).
 
-2. `maintenance_h2_class_counts.png`
+2. `M15_maintenance_h2_class_counts.png`
 - Shows event volume split across revised classes.
 
-3. `maintenance_h2_monthly_mix.png`
+3. `M16_maintenance_h2_monthly_mix.png`
 - Shows how class composition changes month to month.
 
-4. `maintenance_h2_preventive_per_bike_year.png`
+4. `M17_maintenance_h2_preventive_per_bike_year.png`
 - Shows distribution of preventive counts per bike-year under cap logic.
 
-5. `maintenance_h2_top_demand_share_by_class.png`
+5. `M18_maintenance_h2_top_demand_share_by_class.png`
 - Shows how strongly each class correlates with popular stations.
 
 ## 8) Outliers: Removed or Not?

@@ -12,26 +12,26 @@ For each chart, I provide:
 6. What it does not prove.
 
 ## Quick index
-M01. `maintenance_gap_distribution.png` (legacy model context)
-M02. `maintenance_gap_distribution_linear.png` (legacy model context)
-M03. `maintenance_gap_distribution_suspected.png` (legacy model context)
-M04. `maintenance_gap_log10_normal_reference.png` (legacy model context)
-M05. `maintenance_events_monthly.png` (legacy model context)
-M06. `maintenance_events_monthly_suspected_zoom.png` (legacy model context)
-M07. `maintenance_events_day_hour_heatmap.png` (legacy model context)
-M08. `maintenance_top_station_transfers.png` (legacy model context)
-M09. `maintenance_duration_comparison.png` (legacy model context)
-M10. `maintenance_inferred_state_counts.png` (legacy model context)
-M11. `maintenance_inferred_state_monthly_mix.png` (legacy model context)
-M12. `maintenance_service_classes_log10_boxplot.png` (legacy model context)
-M13. `maintenance_gap_boxplot_overall.png` (distribution diagnostics)
-M14. `maintenance_h2_gap_distribution_thresholds.png` (revised hypothesis model)
-M15. `maintenance_h2_class_counts.png` (revised hypothesis model)
-M16. `maintenance_h2_monthly_mix.png` (revised hypothesis model)
-M17. `maintenance_h2_preventive_per_bike_year.png` (revised hypothesis model)
-M18. `maintenance_h2_top_demand_share_by_class.png` (revised hypothesis model)
-M19. `maintenance_gap_distribution_linear_body_0_200h.png` (linear body view, 0-200h with coverage disclaimer)
-M20. `maintenance_gap_linear_vs_log_comparison.png` (Linear Body 2 vs log view for same range)
+M01. `M01_maintenance_gap_distribution.png` (legacy model context)
+M02. `M02_maintenance_gap_distribution_linear.png` (legacy model context)
+M03. `M03_maintenance_gap_distribution_suspected.png` (legacy model context)
+M04. `M04_maintenance_gap_log10_normal_reference.png` (legacy model context)
+M05. `M05_maintenance_events_monthly.png` (legacy model context)
+M06. `M06_maintenance_events_monthly_suspected_zoom.png` (legacy model context)
+M07. `M07_maintenance_events_day_hour_heatmap.png` (legacy model context)
+M08. `M08_maintenance_top_station_transfers.png` (legacy model context)
+M09. `M09_maintenance_duration_comparison.png` (legacy model context)
+M10. `M10_maintenance_inferred_state_counts.png` (legacy model context)
+M11. `M11_maintenance_inferred_state_monthly_mix.png` (legacy model context)
+M12. `M12_maintenance_service_classes_log10_boxplot.png` (legacy model context)
+M13. `M13_maintenance_gap_boxplot_overall.png` (distribution diagnostics)
+M14. `M14_maintenance_h2_gap_distribution_thresholds.png` (revised hypothesis model)
+M15. `M15_maintenance_h2_class_counts.png` (revised hypothesis model)
+M16. `M16_maintenance_h2_monthly_mix.png` (revised hypothesis model)
+M17. `M17_maintenance_h2_preventive_per_bike_year.png` (revised hypothesis model)
+M18. `M18_maintenance_h2_top_demand_share_by_class.png` (revised hypothesis model)
+M19. `M19_maintenance_gap_distribution_linear_body_0_200h.png` (linear body view, 0-200h with coverage disclaimer)
+M20. `M20_maintenance_gap_linear_vs_log_comparison.png` (Linear Body 2 vs log view for same range)
 
 ## Model context
 The charts come from two different logic versions:
@@ -46,7 +46,7 @@ When presenting conclusions, prioritize M14-M18.
 
 ---
 
-## M01 - `maintenance_gap_distribution.png`
+## M01 - `M01_maintenance_gap_distribution.png`
 **Layperson meaning**
 I use this as the big picture of all relocation gap durations. I use it to show how long bikes are inactive between one ride ending and the next ride starting at a different station.
 
@@ -91,7 +91,7 @@ What “log-spaced bins” means in this project:
 
 ---
 
-## M02 - `maintenance_gap_distribution_linear.png`
+## M02 - `M02_maintenance_gap_distribution_linear.png`
 **Layperson meaning**
 I use this as the same gap story but zoomed on the common range so the shape is easier to read.
 
@@ -106,7 +106,7 @@ I do not claim this identifies maintenance vs repair without additional rules.
 
 ---
 
-## M03 - `maintenance_gap_distribution_suspected.png`
+## M03 - `M03_maintenance_gap_distribution_suspected.png`
 **Layperson meaning**
 I use this to show only the longest gaps under the old rule.
 
@@ -121,7 +121,7 @@ I do not claim this proves those extreme gaps are maintenance; they may include 
 
 ---
 
-## M04 - `maintenance_gap_log10_normal_reference.png`
+## M04 - `M04_maintenance_gap_log10_normal_reference.png`
 **Layperson meaning**
 I check whether the log-transformed gap values behave more regularly than raw hours.
 
@@ -136,7 +136,7 @@ I do not claim this proves strict normality or causal operations behavior.
 
 ---
 
-## M05 - `maintenance_events_monthly.png`
+## M05 - `M05_maintenance_events_monthly.png`
 **Layperson meaning**
 I use this to compare monthly total relocation volume with monthly long-gap events under the legacy rule.
 
@@ -151,7 +151,7 @@ I do not claim this proves planned maintenance schedules.
 
 ---
 
-## M06 - `maintenance_events_monthly_suspected_zoom.png`
+## M06 - `M06_maintenance_events_monthly_suspected_zoom.png`
 **Layperson meaning**
 I use this as a clearer month-by-month view of legacy suspected counts.
 
@@ -166,7 +166,7 @@ I do not claim this identifies root cause.
 
 ---
 
-## M07 - `maintenance_events_day_hour_heatmap.png`
+## M07 - `M07_maintenance_events_day_hour_heatmap.png`
 **Layperson meaning**
 I use this to show what days and hours legacy suspected events happen most.
 
@@ -181,7 +181,7 @@ I do not claim this proves workshop shifts or staffing patterns.
 
 ---
 
-## M08 - `maintenance_top_station_transfers.png`
+## M08 - `M08_maintenance_top_station_transfers.png`
 **Layperson meaning**
 I use this to show the most common station-to-station transitions in legacy suspected events.
 
@@ -196,7 +196,7 @@ I do not claim this proves a transfer is maintenance rather than redistribution.
 
 ---
 
-## M09 - `maintenance_duration_comparison.png`
+## M09 - `M09_maintenance_duration_comparison.png`
 **Layperson meaning**
 Quick side-by-side duration comparison between all relocations and legacy extreme-tail events.
 
@@ -211,7 +211,7 @@ I do not claim this classifies event intent.
 
 ---
 
-## M10 - `maintenance_inferred_state_counts.png`
+## M10 - `M10_maintenance_inferred_state_counts.png`
 **Layperson meaning**
 I use this to show counts for the old classification model’s operational states.
 
@@ -226,7 +226,7 @@ I do not claim this validates class labels against true maintenance logs.
 
 ---
 
-## M11 - `maintenance_inferred_state_monthly_mix.png`
+## M11 - `M11_maintenance_inferred_state_monthly_mix.png`
 **Layperson meaning**
 I use this to show how old-model state proportions changed over months.
 
@@ -241,7 +241,7 @@ I do not claim this proves process policy changes without external evidence.
 
 ---
 
-## M12 - `maintenance_service_classes_log10_boxplot.png`
+## M12 - `M12_maintenance_service_classes_log10_boxplot.png`
 **Layperson meaning**
 I use this to compare old-model service-related classes on log-transformed duration scale.
 
@@ -256,7 +256,7 @@ I do not claim this proves those classes map to actual maintenance job types.
 
 ---
 
-## M13 - `maintenance_gap_boxplot_overall.png`
+## M13 - `M13_maintenance_gap_boxplot_overall.png`
 **Layperson meaning**
 I use this to show central spread and outlier boundaries for all relocation gaps.
 
@@ -271,7 +271,7 @@ I do not claim this proves outliers are “bad data”; many may be real prolong
 
 ---
 
-## M14 - `maintenance_h2_gap_distribution_thresholds.png`
+## M14 - `M14_maintenance_h2_gap_distribution_thresholds.png`
 **Layperson meaning**
 I use this as the revised-model backbone chart. I use it to show all gaps and where new rule boundaries are placed.
 
@@ -290,7 +290,7 @@ Threshold locations are assumption-driven, not externally validated truth.
 
 ---
 
-## M15 - `maintenance_h2_class_counts.png`
+## M15 - `M15_maintenance_h2_class_counts.png`
 **Layperson meaning**
 I use this to show how many events fall into each revised class.
 
@@ -305,7 +305,7 @@ I do not claim this proves class correctness without labels from maintenance rec
 
 ---
 
-## M16 - `maintenance_h2_monthly_mix.png`
+## M16 - `M16_maintenance_h2_monthly_mix.png`
 **Layperson meaning**
 I use this to show how revised classes change month to month across years.
 
@@ -320,7 +320,7 @@ I do not claim this proves causality for time shifts.
 
 ---
 
-## M17 - `maintenance_h2_preventive_per_bike_year.png`
+## M17 - `M17_maintenance_h2_preventive_per_bike_year.png`
 **Layperson meaning**
 I use this chart to answer: how often each bike gets preventive events in a year under the revised cap rule.
 
@@ -335,7 +335,7 @@ I do not claim this proves true preventive frequency in reality; it proves rule 
 
 ---
 
-## M18 - `maintenance_h2_top_demand_share_by_class.png`
+## M18 - `M18_maintenance_h2_top_demand_share_by_class.png`
 **Layperson meaning**
 I use this to compare how strongly each class is linked to popular destination stations.
 
@@ -350,7 +350,7 @@ I do not claim this fully separates rebalancing from other operational processes
 
 ---
 
-## M19 - `maintenance_gap_distribution_linear_body_0_200h.png`
+## M19 - `M19_maintenance_gap_distribution_linear_body_0_200h.png`
 **Layperson meaning**
 I use this as a focused linear chart of the core range (`0-200h`) so the main distribution is readable.
 
@@ -365,7 +365,7 @@ I do not claim this shows the entire extreme tail on-axis; it is a body-view cha
 
 ---
 
-## M20 - `maintenance_gap_linear_vs_log_comparison.png`
+## M20 - `M20_maintenance_gap_linear_vs_log_comparison.png`
 **Layperson meaning**
 I use this as a side-by-side demonstration using the Linear Body 2 window (`0-200h`) and a log view of that same window.
 
@@ -404,10 +404,10 @@ I do not claim this proves any operational cause (maintenance vs rebalancing vs 
 
 ## Recommended chart set for reporting
 I use these as the primary set for current conclusions:
-1. M14 (`maintenance_h2_gap_distribution_thresholds.png`)
-2. M15 (`maintenance_h2_class_counts.png`)
-3. M16 (`maintenance_h2_monthly_mix.png`)
-4. M17 (`maintenance_h2_preventive_per_bike_year.png`)
-5. M18 (`maintenance_h2_top_demand_share_by_class.png`)
+1. M14 (`M14_maintenance_h2_gap_distribution_thresholds.png`)
+2. M15 (`M15_maintenance_h2_class_counts.png`)
+3. M16 (`M16_maintenance_h2_monthly_mix.png`)
+4. M17 (`M17_maintenance_h2_preventive_per_bike_year.png`)
+5. M18 (`M18_maintenance_h2_top_demand_share_by_class.png`)
 
 Keep M13 as diagnostics appendix.

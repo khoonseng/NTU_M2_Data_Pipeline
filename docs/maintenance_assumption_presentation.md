@@ -51,11 +51,11 @@ Libraries:
 - Python: `duckdb`, `pandas`, `numpy`, `matplotlib`, `seaborn`
 
 ## 6) Revised Chart Set
-- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_gap_distribution_thresholds.png`
-- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_class_counts.png`
-- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_monthly_mix.png`
-- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_preventive_per_bike_year.png`
-- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/maintenance_h2_top_demand_share_by_class.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/M14_maintenance_h2_gap_distribution_thresholds.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/M15_maintenance_h2_class_counts.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/M16_maintenance_h2_monthly_mix.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/M17_maintenance_h2_preventive_per_bike_year.png`
+- `/home/shaun/NTU_M2_Data_Pipeline/docs/images/M18_maintenance_h2_top_demand_share_by_class.png`
 
 ## 7) Key Message for Stakeholders
 - The older broad preventive band was too permissive.

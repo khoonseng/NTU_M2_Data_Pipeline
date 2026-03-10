@@ -328,7 +328,7 @@ def _save_h2_distribution(df_class: pd.DataFrame) -> None:
   fig.tight_layout()
 
   # I save chart.
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_h2_gap_distribution_thresholds.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M14_maintenance_h2_gap_distribution_thresholds.png"), dpi=150)
 
   # I close figure to free memory.
   plt.close(fig)
@@ -362,7 +362,7 @@ def _save_h2_class_counts(summary: pd.DataFrame) -> None:
   fig.tight_layout()
 
   # I save chart.
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_h2_class_counts.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M15_maintenance_h2_class_counts.png"), dpi=150)
 
   # I close figure.
   plt.close(fig)
@@ -404,7 +404,7 @@ def _save_h2_monthly_mix(df_class: pd.DataFrame) -> None:
   fig.tight_layout()
 
   # I save chart.
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_h2_monthly_mix.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M16_maintenance_h2_monthly_mix.png"), dpi=150)
 
   # I close figure.
   plt.close(fig)
@@ -453,7 +453,7 @@ def _save_h2_preventive_frequency(bike_year: pd.DataFrame) -> None:
   fig.tight_layout()
 
   # I save chart.
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_h2_preventive_per_bike_year.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M17_maintenance_h2_preventive_per_bike_year.png"), dpi=150)
 
   # I close figure.
   plt.close(fig)
@@ -493,7 +493,7 @@ def _save_h2_demand_share(demand_share: pd.DataFrame) -> None:
   fig.tight_layout()
 
   # I save chart.
-  fig.savefig(os.path.join(OUTPUT_DIR, "maintenance_h2_top_demand_share_by_class.png"), dpi=150)
+  fig.savefig(os.path.join(OUTPUT_DIR, "M18_maintenance_h2_top_demand_share_by_class.png"), dpi=150)
 
   # I close figure.
   plt.close(fig)
