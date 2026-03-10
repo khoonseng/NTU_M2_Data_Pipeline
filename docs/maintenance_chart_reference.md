@@ -42,7 +42,8 @@ The charts come from two different logic versions:
    - preventive frequency is capped per bike-year,
    - longer gaps are repair/out-of-service candidates.
 
-When presenting conclusions, prioritize M14-M18.
+When presenting conclusions, I prioritize M14-M18.
+I keep M02 and M03 as optional appendix-only legacy diagnostics (not core reporting charts).
 
 ---
 
@@ -411,3 +412,4 @@ I use these as the primary set for current conclusions:
 5. M18 (`M18_maintenance_h2_top_demand_share_by_class.png`)
 
 Keep M13 as diagnostics appendix.
+Keep M02 and M03 as optional legacy appendix only.
