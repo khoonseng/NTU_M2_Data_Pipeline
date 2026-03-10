@@ -31,15 +31,13 @@ select
     COALESCE(h.start_station_name, s.name) as start_station_name,
     CASE
         WHEN h.end_date is not null THEN COALESCE(COALESCE(COALESCE(h.end_station_id, e.id), h.end_station_logical_terminal), 0)
-        ELSE h.end_station_id
+        ELSE COALESCE(h.end_station_id, -1)
     END as end_station_id,
     CASE
         WHEN h.end_date is not null THEN COALESCE(h.end_station_name, e.name)
-        ELSE h.end_station_name
+        ELSE COALESCE(h.end_station_name, 'Unknown')
     END as end_station_name
 from  {{ source('london_bicycles','cycle_hire')}} h
 left outer join matching_start_stations s on s.name = h.start_station_name
 left outer join matching_end_stations e on e.name = h.end_station_name
 where h.bike_id is not null
-and h.duration is not null
-and h.duration_ms is not null
