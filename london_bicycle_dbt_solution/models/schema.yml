@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: fact_hires
+    description: "Fact table for bicycle hires."
+    columns:
+      - name: rental_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: start_station_key
+        description: "The foreign key to the station dimension table"
+        tests:
+          - relationships:
+              to: ref('dim_station')
+              field: station_key
+      - name: end_station_key
+        description: "The foreign key to the station dimension table"
+        tests:
+          - relationships:
+              to: ref('dim_station')
+              field: station_key
+  - name: dim_station
+    description: "Dimension table for station."
+    columns:
+      - name: station_key
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
