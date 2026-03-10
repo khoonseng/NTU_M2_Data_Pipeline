@@ -59,7 +59,7 @@ def ingest_cycle_station_from_gcs():
 
     # 4. Define the GCS path using wildcards to handle multiple sharded files
     # This supports the large volume (9.57GB) of the cycle_hire table
-    gcs_path = 's3://london-bikes-data-lake/*cycle_station*'
+    gcs_path = 's3://london-bikes-data-lake/bigquery_export/*cycle_station*'
 
     print("Beginning ingestion from GCS to DuckDB cycle_stations table...")
     
