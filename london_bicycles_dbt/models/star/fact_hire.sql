@@ -1,6 +1,6 @@
 select
     rental_id,
-    floor(duration / 60) as duration_minutes,
+    COALESCE(floor(duration / 60), 0) as duration_minutes,
     bike_id,
     start_date,
     end_date,
