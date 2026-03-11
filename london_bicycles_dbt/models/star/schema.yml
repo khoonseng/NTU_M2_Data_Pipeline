@@ -17,7 +17,7 @@ models:
           - not_null
 
       - name: start_date
-        description: "The start date of each bicycle rental"
+        description: "The start date (with timestamp) of each bicycle rental"
         tests:
           - not_null
           
@@ -162,9 +162,4 @@ models:
       - name: cumulative_duration_minutes
         description: "The cumulative duration in minutes"
         tests:
-          - not_null
-
-      - name: date_value
-        description: "The date value"
-        tests:
-          - not_null               
+          - not_null              

@@ -4,15 +4,10 @@ seeds:
     description: "Dimensional table for date series."
     columns:
       - name: date_key
-        description: "The primary key for this table in YYYYMMDD"
+        description: "The primary key for this table in YYYY-MM-DD"
         tests:
           - unique
-          - not_null
-
-      - name: date_value
-        description: "The date value for this table for partitioning"
-        tests:
-          - not_null          
+          - not_null         
 
       - name: year
         description: "The year value from date_key"
