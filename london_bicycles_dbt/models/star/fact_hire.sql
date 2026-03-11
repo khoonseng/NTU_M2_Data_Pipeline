@@ -1,3 +1,15 @@
+{{
+  config(
+    materialized='table',
+    partition_by={
+      "field": "partition_date",
+      "data_type": "date",
+      "granularity": "day"
+    },
+    cluster_by = ["bike_id", "start_station_id", "end_station_id"]
+  )
+}}
+
 select
     rental_id,
     COALESCE(floor(duration / 60), 0) as duration_minutes,
@@ -8,5 +20,6 @@ select
     end_station_id,
     EXTRACT(HOUR FROM start_date) AS start_hour,
     {{ generate_date_key('start_date') }} as start_date_key,
-    COALESCE({{ generate_date_key('end_date') }}, 99990101) as end_date_key
+    COALESCE({{ generate_date_key('end_date') }}, 99990101) as end_date_key,
+    CAST(start_date AS DATE) as partition_date
 from {{ ref('stg_cycle_hire') }}
