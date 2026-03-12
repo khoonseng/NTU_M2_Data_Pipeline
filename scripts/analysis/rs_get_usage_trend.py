@@ -5,9 +5,9 @@ import seaborn as sns
 import os
 
 # Configuration
-DB_PATH = './data/london_bikes.db'
+DB_PATH = './data/warehouse/london_bikes.db'
 OUTPUT_DIR = './outputs/'
-SCHEMA = 'london_bicycles'
+SCHEMA = 'london_bicycles_star'
 
 def setup_environment():
     """Ensures output directory exists."""
@@ -22,11 +22,12 @@ def extract_and_aggregate():
     SELECT
         strftime(start_date, '%Y-%m') AS year_month,
         CASE 
-            WHEN bike_model IS NULL OR TRIM(bike_model) = '' THEN 'Pre-Model Era'
+            WHEN start_date < '2022-09-16' THEN 'Pre-Model Era'
             ELSE bike_model
         END AS bike_model,
         COUNT(*) AS trip_count
-    FROM {SCHEMA}.staging_cycle_hire
+    FROM {SCHEMA}.fact_hire h
+    inner join {SCHEMA}.dim_bike b on h.bike_id = b.bike_id
     WHERE start_date IS NOT NULL
     GROUP BY 1, 2
     ORDER BY 1, 2;
