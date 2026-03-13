@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-# Configuration
-DB_PATH = './data/warehouse/london_bikes.db'
-OUTPUT_DIR = './outputs/'
-SCHEMA = 'london_bicycles_star'
+# Configuration — paths are now relative to this script file's location
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, '../../data/warehouse/london_bikes.db')
+OUTPUT_DIR = os.path.join(BASE_DIR, './outputs/')
+SCHEMA = 'london_bikes'
 
 def setup_environment():
     """Ensures output directory exists."""
@@ -74,8 +75,6 @@ def visualize_trends(pivot_df):
         modern_df = pivot_df.loc[modern_start:]
 
         plt.figure(figsize=(10, 6))
-        # Drop Pre-Model Era if it's mostly 0 or we just want to focus on new models
-        # Let's keep it to show the transition
         modern_df.plot(kind='bar', stacked=True, ax=plt.gca(), alpha=0.7)
         
         plt.title(f"Modern Era Bike Usage (Since {modern_start})")
@@ -88,7 +87,6 @@ def visualize_trends(pivot_df):
         plt.close()
         
         # Chart C: 100% Stacked Bar for Modern Era
-        # This shows the proportion of PBSC_EBIKE vs CLASSIC clearly
         modern_pct_df = modern_df.div(modern_df.sum(axis=1), axis=0) * 100
         
         plt.figure(figsize=(10, 6))
@@ -104,8 +102,7 @@ def visualize_trends(pivot_df):
         plt.close()
 
     print(f"LOG: Charts saved to {OUTPUT_DIR}")
-    
-   
+
 
 def main():
     setup_environment()
