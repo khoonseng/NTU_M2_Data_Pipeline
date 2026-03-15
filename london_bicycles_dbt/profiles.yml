@@ -13,7 +13,7 @@ london_bicycles_dbt: # This is the profile name
       dataset: london_bicycles
       location: EU
       method: oauth
-      project: testgcp-487607
+      project: dsai-module2-gc-4339
       priority: interactive
       job_execution_timeout_seconds: 300
       job_retries: 1
