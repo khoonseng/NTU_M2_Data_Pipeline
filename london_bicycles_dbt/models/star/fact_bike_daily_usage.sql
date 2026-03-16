@@ -2,7 +2,7 @@
   config(
     materialized='table',
     partition_by={
-      "field": "date_value",
+      "field": "date_key",
       "data_type": "date",
       "granularity": "day"
     },
@@ -20,11 +20,10 @@ bike_date_combined as (
         {{ dbt_utils.generate_surrogate_key(['b.bike_id', 'd.date_key']) }} as bike_usage_key,
         d.date_key,
         b.bike_id,
-        d.date_value
     FROM {{ ref('dim_bike') }} b
     CROSS JOIN {{ ref('dim_date') }} d
     inner join bikes_hired h on h.bike_id = b.bike_id
-    where d.date_key != 99990101
+    where d.date_key != '9999-01-01'
 ),
 daily_hire_info as (
     select bike_id, 
@@ -37,7 +36,6 @@ daily_hire_info as (
 select c.bike_usage_key,
         c.bike_id,
         c.date_key,
-        c.date_value,
         COALESCE(i.hire_count, 0) as hire_count,
         COALESCE(i.daily_duration_minutes, 0) as daily_duration_minutes,
         SUM(COALESCE(daily_duration_minutes, 0)) OVER (PARTITION BY c.bike_id ORDER BY c.date_key) as cumulative_duration_minutes

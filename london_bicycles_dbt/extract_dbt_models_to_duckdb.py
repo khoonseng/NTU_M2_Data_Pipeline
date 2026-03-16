@@ -13,10 +13,10 @@ def main():
     if not dataset_name:
         dataset_name = "london_bicycles_star"
 
-    # 1) Save to './data/london_bicycle.duckdb' (create the folder if no exist)
-    output_dir = './data'
-    os.makedirs(output_dir, exist_ok=True)
-    db_path = os.path.join(output_dir, 'london_bicycle.duckdb')
+    # 1) Save to '../data/london_bicycle.duckdb' (create the folder if no exist)
+    output_dir = '../data/warehouse'
+    os.makedirs(output_dir, exist_ok=True)  # Create the directory if it doesn't exist
+    db_path = os.path.join(output_dir, 'london_bikes.db')
 
     print(f"\nInitializing BigQuery client for project '{project_id}'...")
     try:
