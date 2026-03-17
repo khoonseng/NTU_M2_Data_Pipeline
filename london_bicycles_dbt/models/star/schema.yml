@@ -20,6 +20,9 @@ models:
         description: "The start date (with timestamp) of each bicycle rental"
         tests:
           - not_null
+
+      - name: end_date
+        description: "The end date (with timestamp) of each bicycle rental"
           
       - name: start_hour
         description: "The start hour (0 to 23) of each bicycle rental"
@@ -108,6 +111,16 @@ models:
 
       - name: station_name
         description: "The name of each station"
+        tests:
+          - not_null
+
+      - name: latitude
+        description: "The latitude for each station"
+        tests:
+          - not_null
+
+      - name: longitude
+        description: "The longitude for each station"
         tests:
           - not_null
 
