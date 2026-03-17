@@ -31,7 +31,8 @@ def main():
         "dim_station",
         "dim_date",
         "fact_bike_daily_usage",
-        "fact_hire"
+        "fact_hire",
+        "next_gen_station_table" #
     ]
 
     print(f"Connecting to DuckDB at '{db_path}'...")
