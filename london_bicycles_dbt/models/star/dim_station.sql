@@ -14,6 +14,8 @@ select
     station_key,
     station_id,
     station_name,
+    latitude,
+    longitude,
     COALESCE(st.total_start_count, 0) as total_start_count,
     COALESCE(et.total_end_count, 0) as total_end_count
 from {{ ref('stg_cycle_stations') }} s 

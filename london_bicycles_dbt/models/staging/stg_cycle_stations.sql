@@ -10,8 +10,11 @@ WITH stations_from_hire AS (
         from {{ ref('stg_cycle_hire') }}
 )
 SELECT 
-    {{ dbt_utils.generate_surrogate_key(['station_id', 'station_name']) }} station_key,
-    station_id,
-    station_name
-FROM stations_from_hire
+    {{ dbt_utils.generate_surrogate_key(['h.station_id', 'h.station_name']) }} station_key,
+    h.station_id,
+    h.station_name,
+    COALESCE(s.latitude, 0) as latitude,
+    COALESCE(s.longitude, 0) as longitude
+FROM stations_from_hire h
+left outer join {{ source('london_bicycles','cycle_stations')}} s on h.station_id = s.id
 where station_name is not null
